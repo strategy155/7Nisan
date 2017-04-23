@@ -1,35 +1,54 @@
 import requests
-import json
-import datetime
+import ujson
+
+OWNER_ID = '-86678270'
+API_URL = 'https://api.vk.com/method/'
+WALL_GET_METHOD = 'wall.get'
+USER_INFO_METHOD = 'users.get'
+WALL_GET_METHOD = 'wall.get'
+API_VERSION = '5.63'
+
+def get_resp_with_method(api_url, method, params):
+    api_request_url = api_url + method
+    response = requests.get(api_request_url, params)
+    response_dic = ujson.loads(response.text)
+    return response_dic
 
 
-def get_post_ids(owner_id=-104603396):
-    all_posts = {}
-    i = 0
-    while True:
-        req_obj = requests.get('https://api.vk.com/method/wall.get?owner_id='+str(owner_id)+'&count=100&offset='+str(i))
-        resp_arr = json.loads(req_obj.text)['response']
-        leng = len(resp_arr)
-        for elem in resp_arr:
-            if type(elem) == type(dict()):
-                date = datetime.datetime.fromtimestamp(
-                        int(resp_arr[1]['date'])
-                        ).strftime('%Y-%m')
+class VkGroup(object):
+    posts = list()
 
-                try:
-                    all_posts[date].append(elem['id'])
-                except KeyError:
-                    all_posts[date] = [elem['id']]
-        if leng == 1:
-            break
-        if i >=300:
-            break
-        i +=100
-    return all_posts
+    def download_posts(self):
+        wall_get_params = {'owner_id': self.id, 'count': '100', 'version': API_VERSION, 'offset': 0}
+        while True:
+            response_dic = get_resp_with_method(API_URL, WALL_GET_METHOD, wall_get_params)
+            posts_dic = response_dic['response'][1:]
+            for elem in posts_dic:
+
+            print(len(response_dic['response']))
+
+        return None
+
+    def __init__(self, owner_id):
+        self.id = id
+        self.download_posts()
 
 
-def count_comments(post_id, owner_id=-104603396):
-    req_obj = requests.get('https://api.vk.com/method/wall.getComments?owner_id='+str(owner_id)+'&post_id='+str(post_id))
-    resp_arr = json.loads(req_obj.text)['response']
-    comms_count = resp_arr[0]
-    return comms_count
+class User(object):
+    age = int()
+    city = str()
+
+    def __init__(self, signer_id):
+
+
+class Comment(object):
+    post = Post()
+
+
+class Post(object):
+
+    def __init__(self, owner_id, post_id, text, signer_id):
+        self.id = post_id
+        self.owner_id = owner_id
+        self.text = text
+        self.signer = User(signer_id)

@@ -1,0 +1,56 @@
+convert_resp_to_json(url, params)
+    ret dict
+
+
+Class(owner_id) Group
+self.id str
+self.posts list [Post()]
+_init_:
+    self.id = owner_id
+_download_all_posts(self)
+    request
+    json.parse
+    cycle
+    self.posts post_list
+
+
+VK_Base_Class
+self.id str
+
+
+Class User
+self.id
+self.age
+self.city
+
+Class Comment
+self.id str
+self.post Post
+self.text str
+self.from User
+self.length int
+
+Class Post (owner_id, post_id)
+self.id str
+self.owner_id str
+self.text str
+self.signer User
+self.comments list[Comment]
+
+init:
+    id owner_id text
+    create_signer = User(signer_id)
+    get_comments(self)
+
+get_comments(self):
+    wallgetcomm
+    convert json
+    for elem in items:
+        Comm(id,self,text,from_id)
+        self.comms.append()
+
+
+
+
+
+get post lengths, and relatively comments mean length, to every comment apply city id/name and age
