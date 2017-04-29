@@ -1,0 +1,9 @@
+OWNER_ID = '-86678270'
+API_URL = 'https://api.vk.com/method/'
+WALL_GET_METHOD = 'wall.get?'
+USER_INFO_METHOD = 'users.get?'
+CITY_GET_METHOD = 'database.getCitiesById?'
+COMMENT_GET_METHOD = 'wall.getComments?'
+POSTS_COUNT = 200
+API_VERSION = '5.63'
+DEFAULT_MESSAGE = 'Not available'
