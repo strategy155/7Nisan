@@ -7,3 +7,4 @@ COMMENT_GET_METHOD = 'wall.getComments?'
 POSTS_COUNT = 200
 API_VERSION = '5.63'
 DEFAULT_MESSAGE = 'Not available'
+DATE = 2017

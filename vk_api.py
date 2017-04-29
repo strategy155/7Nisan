@@ -1,6 +1,5 @@
 import pickle
-import re
-from definitions import OWNER_ID, API_URL, WALL_GET_METHOD, USER_INFO_METHOD, COMMENT_GET_METHOD, POSTS_COUNT, \
+from definitions import API_URL, WALL_GET_METHOD, USER_INFO_METHOD, COMMENT_GET_METHOD, POSTS_COUNT, \
     API_VERSION
 from utils import get_resp_with_method
 
@@ -90,21 +89,8 @@ class Post(object):
             comments_get_params['offset'] += 100
 
 
-class VkGroupStats(object):
-
-    def __init__(self, group_obj):
-        self.group_obj = group_obj
-        self._count_posts_mean_length()
-
-    def _count_posts_mean_length(self):
-        for post in self.group_obj.posts:
-            print(post.text.split(' '))
-
-
 if __name__ == '__main__':
+    pass
     # cool_shit = VkGroup(OWNER_ID)
     # with open('cool_shit.pkl', 'wb') as f:
     #     pickle.dump(cool_shit, f)
-    with open('cool_shit.pkl', 'rb') as f:
-        cool_shit = pickle.load(f)
-    VkGroupStats(cool_shit)
